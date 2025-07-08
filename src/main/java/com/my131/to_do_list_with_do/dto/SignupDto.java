@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SignupDTO {
+public class SignupDto {
     @NotBlank(message = "아이디를 입력하세요") //공백시 에러메시지
     @Size(min=3, max=10, message = "아이디는 3~10자여야 합니다") //길이 제한 지정
     private String username;
