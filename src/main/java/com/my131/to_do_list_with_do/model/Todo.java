@@ -5,8 +5,9 @@ import lombok.Data;
 
 @Data
 @Builder
-public class User {
+public class Todo {
     private Integer id;
-    private String username;
-    private String password;
+    private String title;
+    private boolean completed;
+    private Integer userId;
 }
