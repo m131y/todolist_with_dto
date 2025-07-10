@@ -10,22 +10,34 @@
 <div th:if="${param.registered}" class="success">
     🎉 회원가입이 완료되었습니다! 로그인 해주세요.
 </div>
+<!--서버에서 모델로 error라는 값이 전달되면, 해당 에러 메시지를 출력.-->
 <div th:if="${error}" class="error" th:text="${error}"></div>
-<form th:action="@{/login}" th:object="${loginDto}" method="post" class="form-container">
+    <!--태그로 로그인 폼 시작.-->
+    <!--th:action="@{/login}": /login 주소로 POST 요청 전송.-->
+    <!--th:object="${loginDto}": loginDto 객체를 기반으로 입력 필드를 바인딩함.-->
+    <!--즉, 아래 th:field="*{username}" 같은 필드가 loginDto.getUsername()과 연결됨.-->
+    <form th:action="@{/login}" th:object="${loginDto}" method="post" class="form-container">
     <p>
         <label>
             아이디:
+            <!--th:field="*{username}": DTO의 username 필드와 자동 바인딩됨.-->
+            <!--사용자가 입력한 값은 나중에 @ModelAttribute LoginDto loginDto로 컨트롤러에 전달됨.-->
             <input type="text" th:field="*{username}" />
         </label>
+    <!--username 필드에 유효성 검사 에러가 있으면 해당 메시지를 보여줌-->
     <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
     </p>
     <p>
         <label>
             패스워드:
+            <!--th:field="*{password}": DTO의 password 필드와 바인딩됨.-->
             <input type="password" th:field="*{password}" />
         </label>
-    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+        <!--password 필드에 유효성 검사 에러가 있으면 해당 메시지를 보여줌-->
+        <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
     </p>
+    <!--폼 제출 버튼.-->
+    <!--클릭 시 POST 방식으로 /login으로 요청 전송.-->
     <button type="submit">로그인</button>
     <a th:href="@{/signup}" class="cancel">회원가입</a>
 </form>

@@ -31,7 +31,7 @@ public class LoginController {
     public String doLogin(
             //클라이언트가 보낸 username, password를 loginDto에 자동 매핑
             //@Valid는 DTO 내부의 유효성 검사 어노테이션(@NotBlank 등)을 실행함
-            @Valid @ModelAttribute("loginDto") LoginDto loginDto,
+            @Valid @ModelAttribute() LoginDto loginDto,
             BindingResult bindingResult,    //유효성 검사 결과가 이 객체에 담김
             HttpSession httpSession,    	 //세션 객체를 인자로 받아서 사용함. 로그인 성공 시 이 안에 사용자 정보를 저장하여 로그인 상태를 유지
             Model model
